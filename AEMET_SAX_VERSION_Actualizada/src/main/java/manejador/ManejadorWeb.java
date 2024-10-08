@@ -35,17 +35,20 @@ public class ManejadorWeb extends DefaultHandler {
 	        xr = parser.getXMLReader();
 	        this.is=new InputSource(new URL(strUrl).openStream());
 		} 
-		catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
+		catch (ParserConfigurationException e) 
+		{
 			e.printStackTrace();
-		} catch (SAXException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (SAXException e) 
+		{
 			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (MalformedURLException e) 
+		{
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
 
@@ -82,14 +85,7 @@ public class ManejadorWeb extends DefaultHandler {
 	@Override
 	public void startDocument() throws SAXException 
 	{
-		super.startDocument();
-	}
-	
-	//FINAL DEL DOCUMENTO
-	@Override
-	public void endDocument() throws SAXException 
-	{
-		super.endDocument();
+		dias = new ArrayList<Dia>();
 	}
 
 	//-ETIQUETA: INICIO → aqui guardamos los datos de los atributos dentro de la etiqueta
@@ -97,19 +93,51 @@ public class ManejadorWeb extends DefaultHandler {
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException 
 	{
 		super.startElement(uri, localName, qName, attributes);
+		if (localName.equals("dia")) 
+		{
+			dia = new Dia();
+			dia.setFecha(attributes.getValue("fecha"));
+		}
+		else if (localName.equals("temperatura")) 
+		{
+			isTemp = true;
+		}
+		else if (localName.equals("estado_cielo")) 
+		{
+			dia.setProno(attributes.getValue("descripcion"));
+		}	
 	}
 
 	//-ETIQUETA: FIN → aqui guardamos los datos del contenido de la etiqueta (entre el inicio y fin)
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException 
 	{
-		super.endElement(uri, localName, qName);
+		// TODO Auto-generated method stub
+				super.endElement(uri, localName, qName);
+				if (localName.equals("dia")) {
+					dias.add(dia);	
+				}
+				else if (localName.equals("prob_precipitacion")) {
+					dia.setPreci(lastContent);
+				}
+				else if (localName.equals("estado_cielo")) {
+					dia.setIcono(lastContent);
+				}
+				else if (localName.equals("maxima") && isTemp) {
+					dia.setMax(lastContent);
+				}
+				else if (localName.equals("minima") && isTemp) {
+					dia.setMin(lastContent);
+				}		
+				else if (localName.equals("temperatura")) {
+					isTemp = false;
+				}	
 	}
 
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException 
 	{
-		super.characters(ch, start, length);
+		lastContent = String.valueOf(ch, start, length);
 	}
 
 
