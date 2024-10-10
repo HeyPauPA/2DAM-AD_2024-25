@@ -7,11 +7,13 @@ import model.Dia;
 
 public class Prueba {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		ManejadorWeb manejador = new ManejadorWeb("https://www.aemet.es/xml/municipios/localidad_45168.xml");
 		ArrayList<Dia> dias = manejador.parsear();
 		
-		for (Dia dia:dias) {
+		for (Dia dia:dias) 
+		{
 			System.out.println(dia);
 		}
 

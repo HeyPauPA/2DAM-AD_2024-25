@@ -11,7 +11,8 @@ public class Prueba {
 		Aemet aemet = new Aemet();
 		ArrayList<Dia> dias = aemet.getDias();
 		
-		for (Dia dia: dias) {
+		for (Dia dia: dias) 
+		{
 			System.out.println(dia);
 		}
 		

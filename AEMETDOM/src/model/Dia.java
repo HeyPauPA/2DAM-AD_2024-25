@@ -1,17 +1,24 @@
 package model;
 
-public class Dia {
+public class Dia 
+{
+	//------- Atributos -------
 	private String fecha;
 	private String icono;
 	private String preci;
 	private String prono;
 	private String max;
 	private String min;
-	public Dia() {
+	
+	//------ Constructores ----
+	public Dia() 
+	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public Dia(String fecha, String icono, String preci, String prono, String max, String min) {
+	
+	//-------- Getters/Setters --------
+	public Dia(String fecha, String icono, String preci, String prono, String max, String min) 
+	{
 		super();
 		this.fecha = fecha;
 		this.icono = icono;
@@ -56,6 +63,8 @@ public class Dia {
 	public void setMin(String min) {
 		this.min = min;
 	}
+	
+	//*Imprimir
 	@Override
 	public String toString() {
 		return "Dia [fecha=" + fecha + ", icono=" + icono + ", preci=" + preci + ", prono=" + prono + ", max=" + max

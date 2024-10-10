@@ -54,7 +54,7 @@ public class OpenWeather {
 			
 			//----- TAG NUBES -----
 			Element eleclouds = (Element) nodotime.getElementsByTagName("clouds").item(0);
-			//ATRIBUTO VALOR
+				//ATRIBUTO VALOR
 			dia.setProno(eleclouds.getAttribute("value"));
 			
 			//AÑADIMOS EL DIA CON TODOS SUS ATRIBUTOS

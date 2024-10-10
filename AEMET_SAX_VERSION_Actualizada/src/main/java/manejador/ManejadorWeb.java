@@ -1,7 +1,8 @@
 package manejador;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,13 +16,14 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
 import model.Dia;
-
 public class ManejadorWeb extends DefaultHandler {
 
 	private XMLReader xr;
 	private String lastContent;
 	private InputSource is;
 	private ArrayList<Dia> dias;
+	private Dia dia;
+	private boolean isTemp;
 	
 
 	public ManejadorWeb(String strUrl) 
@@ -33,7 +35,7 @@ public class ManejadorWeb extends DefaultHandler {
 		{
 			parser = parserFactory.newSAXParser();
 	        xr = parser.getXMLReader();
-	        this.is=new InputSource(new URL(strUrl).openStream());
+	        this.is=new InputSource(new URI(strUrl).toURL().openStream());
 		} 
 		catch (ParserConfigurationException e) 
 		{
@@ -51,7 +53,11 @@ public class ManejadorWeb extends DefaultHandler {
 		{
 			e.printStackTrace();
 		}
-
+		catch 
+		(URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		xr.setContentHandler(this);
 		xr.setErrorHandler(this);
 	}
