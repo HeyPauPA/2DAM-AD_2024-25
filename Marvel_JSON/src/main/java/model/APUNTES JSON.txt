@@ -1,0 +1,10 @@
+APUNTES JSON:
+		  (↓llámalo personajes)
+	Root → data → results →
+		                   name
+		                   description
+		                   thumbnail → 
+				                       extensión  
+								            +
+								           path 
+					(se unen los 2 con un . ¡recuerda lo de standard fantastic!)
